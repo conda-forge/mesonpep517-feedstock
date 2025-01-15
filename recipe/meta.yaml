@@ -7,25 +7,25 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/mesonpep517-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/mesonpep517-{{ version }}.tar.gz
   sha256: 172a3b25f2ea1c9a9b6a1123543b7fd3127139f54ba8b9f7c4d27895207b288c
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
     - pip
-    - python >=3.7
+    - python {{ python_min }}
     - meson
     - setuptools
     - toml
     - wheel >0.33
   run:
     - meson
-    - python >=3.7
+    - python >={{ python_min }}
     - setuptools
     - toml
     - wheel >0.33
@@ -37,6 +37,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://gitlab.com/thiblahute/mesonpep517
